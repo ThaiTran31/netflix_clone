@@ -16,9 +16,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+
+
+# Admin Panel Configuration
+
+admin.site.site_header = "TvT Netflix Clone"
+admin.site.site_title = "TvT Netflix Site Admin"
+admin.site.index_title = "TvT Administration"
+admin.site.site_url = "/admin"
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("catalog/", include("catalog.urls")),
     path("account/", include("account.urls")),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
