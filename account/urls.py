@@ -21,4 +21,6 @@ urlpatterns = [
         name="log-out"
     ),
     path("signup/", views.register_view, name="sign-up"),
+    path("profiles/", views.ProfileList.as_view(), name="profile-list"),
+    path("profile/create/", views.ProfileCreate.as_view(), name="profile-create"),
 ]

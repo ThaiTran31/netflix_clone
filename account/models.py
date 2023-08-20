@@ -26,3 +26,7 @@ class Profile(models.Model):
         choices=AGE_CHOICES,
         max_length=10,
     )
+
+    @property
+    def is_kid(self):
+        return self.age_limit == "kids"
