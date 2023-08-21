@@ -13,7 +13,7 @@ Netflix Profiles
     </h2>
     <div class="flex flex-wrap justify-center items-center w-10/12  md:w-6/12">
         {% for profile in profiles %}
-        <a href="">
+        <a href="{% url 'movie-list' profile.id %}">
             <div class="w-32 h-32 m-4 {% if profile.is_kid %}bg-pink-500{% else %}bg-blue-500{% endif %} flex justify-center items-center flex-col rounded-md cursor-pointer">
                 <p class="text-6xl">
                     {{ profile.name|slice:":1"|title }}

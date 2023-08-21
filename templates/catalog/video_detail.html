@@ -1,0 +1,11 @@
+{% extends "base_generic.html" %}
+
+{% block title %}
+Netflix Watching
+{% endblock title %}
+
+{% block content %}
+<main class="bg-primary_black h-full w-full">
+    <video controls src="{{ video.file.url }}" class="w-full h-screen player"></video>
+</main>
+{% endblock content %}

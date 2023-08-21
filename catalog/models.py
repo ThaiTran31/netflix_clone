@@ -1,6 +1,7 @@
 import uuid
 
 from django.db import models
+from django.urls import reverse
 
 
 class Star(models.Model):
@@ -75,6 +76,9 @@ class Movie(models.Model):
         return ", ".join([str(star) for star in self.star.all()[:2]])
     display_star.short_description = "Star"
 
+    def get_absolute_url(self):
+        return reverse("movie-detail", args=[str(self.id)])
+
     def __str__(self):
         return self.title
 
@@ -88,6 +92,9 @@ class Video(models.Model):
     title = models.CharField(max_length=100, null=True, blank=True)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     file = models.FileField(upload_to="movie_videos", null=True, blank=True)
+
+    def get_absolute_url(self):
+        return reverse("video-detail", args=[str(self.id)])
 
     def __str__(self):
         return self.title
