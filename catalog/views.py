@@ -17,12 +17,14 @@ class MovieList(LoginRequiredMixin, ListView):
     model = Movie
     context_object_name = "movies"
 
+    # def get(self, request, *args, **kwargs):
+    #     return super().get(request, *args, **kwargs)
+
     def get_queryset(self):
         profile = get_object_or_404(Profile, id=self.kwargs["profile_id"])
-        if profile.age_limit == "kids":
-            return Movie.objects.filter(age_limit__exact=profile.age_limit)
-        else:
-            return Movie.objects.all()
+        maturity_level = self.request.session.get("maturity_level", profile.age_limit)
+        self.request.session["maturity_level"] = maturity_level
+        return Movie.objects.filter(age_limit__exact=maturity_level)
 
     def get_context_data(self, **kwargs):
         context = super(MovieList, self).get_context_data(**kwargs)
